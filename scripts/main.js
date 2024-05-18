@@ -2,6 +2,7 @@ const currentTempElement = document.getElementById("current-temp");
 const minT = document.getElementById("minT");
 const maxT = document.getElementById("maxT");
 const prec = document.getElementById('prec');
+const img = document.getElementById('img');
 const API_KEY = "cHUT2O6QnIEqP8YWYBSFBJTDPWczIFJ7";
 navigator.geolocation.watchPosition(async (position) => {
     const { latitude: lat, longitude: long } = position.coords;
@@ -9,10 +10,19 @@ navigator.geolocation.watchPosition(async (position) => {
     console.log(long);
     const weatherData = await getWeather(lat, long);
     console.log(weatherData);
-    currentTempElement.innerText = `${weatherData.current.temperature_2m} ${weatherData.current_units.temperature_2m}`;
+    currentTempElement.innerText = `${weatherData.current.temperature_2m}${weatherData.current_units.temperature_2m}`;
     minT.innerText = `${weatherData.daily.temperature_2m_min} ${weatherData.daily_units.temperature_2m_min}`;
     maxT.innerText = `${weatherData.daily.temperature_2m_max} ${weatherData.daily_units.temperature_2m_max}`;
     prec.innerText = `${weatherData.current.precipitation} ${weatherData.current_units.precipitation}`
+    if (weatherData.current.precipitation > 0) {
+        img.setAttribute("src", 'rainy.jpg');
+    }
+    else if (weatherData.current.precipitation === 0 && weatherData.current.cloud_cover > 50) {
+        img.setAttribute("src", "sunny_cloud.jpg");
+    }
+    else {
+        img.setAttribute("src", "sun.png");
+    }
     const reverseURL = new URL("/v2/reverse", "https://api.geocodify.com");
     reverseURL.searchParams.set("api_key", API_KEY);
     reverseURL.searchParams.set("lng", long);
