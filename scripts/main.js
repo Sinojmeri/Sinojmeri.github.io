@@ -13,7 +13,7 @@ navigator.geolocation.watchPosition(async (position) => {
     minT.innerText = `${weatherData.daily.temperature_2m_min} ${weatherData.daily_units.temperature_2m_min}`;
     maxT.innerText = `${weatherData.daily.temperature_2m_max} ${weatherData.daily_units.temperature_2m_max}`;
     prec.innerText = `${weatherData.current.precipitation} ${weatherData.current_units.precipitation}`
-    const reverseURL = new URL("/v2/reverse", "http://api.geocodify.com");
+    const reverseURL = new URL("/v2/reverse", "https://api.geocodify.com");
     reverseURL.searchParams.set("api_key", API_KEY);
     reverseURL.searchParams.set("lng", long);
     reverseURL.searchParams.set("lat", lat);
