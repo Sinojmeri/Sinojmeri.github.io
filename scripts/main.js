@@ -11,8 +11,8 @@ navigator.geolocation.watchPosition(async (position) => {
     const weatherData = await getWeather(lat, long);
     console.log(weatherData);
     currentTempElement.innerText = `${weatherData.current.temperature_2m}${weatherData.current_units.temperature_2m}`;
-    minT.innerText = `${weatherData.daily.temperature_2m_min} ${weatherData.daily_units.temperature_2m_min}`;
-    maxT.innerText = `${weatherData.daily.temperature_2m_max} ${weatherData.daily_units.temperature_2m_max}`;
+    minT.innerText = `${weatherData.daily.temperature_2m_min}${weatherData.daily_units.temperature_2m_min}`;
+    maxT.innerText = `${weatherData.daily.temperature_2m_max}${weatherData.daily_units.temperature_2m_max}`;
     prec.innerText = `${weatherData.current.precipitation} ${weatherData.current_units.precipitation}`
     if (weatherData.current.precipitation > 0) {
         img.setAttribute("src", 'rainy.jpg');
